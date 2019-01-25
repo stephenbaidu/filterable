@@ -22,7 +22,7 @@ module Filterable
           field, op = key.split('.')
           next unless columns_hash[field]
 
-          if simple_ops[op]
+          if simple_ops[op.to_s.to_sym]
             query_klass = query_klass.where("#{field} #{simple_ops[op.to_sym]} ?", value)
           elsif op == 'in'
             query_klass = query_klass.where("#{field} IN (?)", value.split(','))
